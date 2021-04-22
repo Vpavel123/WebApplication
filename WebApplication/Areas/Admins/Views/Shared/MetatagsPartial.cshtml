@@ -1,0 +1,30 @@
+﻿@using WebApplication.Service
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+@if (ViewBag.Title != null)
+{
+    <title>@ViewBag.Title</title>
+}
+else
+{
+    <title>@Config.CompanyName</title>
+}
+
+@if (ViewBag.Description != null)
+{
+    <meta name="description" content="@ViewBag.description" />
+}
+else
+{
+    <meta name="description" content="Description main page" />
+
+}
+
+@if (ViewBag.Keywords != null)
+{
+    <meta name="keywords" content="@ViewBag.Keywords" />
+}
+else
+{
+    <meta name="keywords" content="seo, search engine optimization" />
+}

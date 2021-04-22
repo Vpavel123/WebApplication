@@ -1,0 +1,25 @@
+﻿@using WebApplication.Service
+
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    @await Html.PartialAsync("MetatagsPartial")
+    @await Html.PartialAsync("CssPartial")
+</head>
+<body class="homepage is-preload">
+    <p>Trmp Best presidet</p>
+    <ul class="menu-main">
+        <li><a href="/Admins" class="current">Пользователи</a></li>
+        <li><a href="/Admins/Users/Create">Добавление</a></li>
+        <li><a href="/Admins/Roles">Список ролей</a></li>
+        <li><a href="/Admins/Roles/UserList">Список пользователей</a></li>
+    </ul>
+    <div id="page-wrapper">
+        @RenderBody()
+    </div>
+
+    <!-- Scripts -->
+    @await Html.PartialAsync("ScriptsPartial")
+</body>
+</html>

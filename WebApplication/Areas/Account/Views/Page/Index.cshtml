@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebApplication.Models.User>
+
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+
+@{
+    ViewBag.Title = "Пользователь";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="widget">
+        <ul>
+            <li><a href="~/Account/Page/">Данные пассажира</a></li>
+            <li><a href="">Ваши заказы</a></li>
+            <li><a href="">Спосоь оплаты</a></li>
+        </ul>
+    </div>
+
+    <div class="Layout-content">
+        <div class="UserAccountContent-UserAccountProfile">
+            <div class="profile">
+                <div class="header-profile">
+                    <header class="ContainerHeader">
+                        <div class="ContainerHeaderstyles__Header">
+                            <h5 class="header-profile section-profile heading">Профиль пассажира</h5>
+                        </div>
+                    </header>
+                </div>
+                <section>
+                    <p class="section-profile">Добавьте свои данные для быстрого бронирования.</p>
+                    <p class="section-profile">@UserManager.FindByEmailAsync(User.Identity.Name).Result.Name @UserManager.FindByEmailAsync(User.Identity.Name).Result.Surname (Владелец учетной записи)</p>
+                    <div class="Layout-BasicData section-profile change-profile">
+                        <div><h5 class="heading">Основные данные</h5></div>
+                        <div class="Layout-heading-change"><a asp-action="Edit" asp-route-id="@UserManager.FindByEmailAsync(User.Identity.Name).Result.Id">Изменить</a></div>
+                    </div>
+                    <div class="change-profile">
+                        <div class="section-profile change-profile-div">
+                            <p>Электронная почта</p>
+                            <p>Имя</p>
+                            <p>Дата рождения</p>
+                            <p>Номер телефона</p>
+                            <p>Адрес</p>
+                        </div>
+                        <div class="Layout-heading-change-flex change-profile-div">
+                            <p>@User.Identity.Name</p>
+                            <p>@UserManager.FindByEmailAsync(User.Identity.Name).Result.Name @UserManager.FindByEmailAsync(User.Identity.Name).Result.Surname </p>
+                            <p>@UserManager.FindByEmailAsync(User.Identity.Name).Result.PhoneNumber</p>
+                            <p>@UserManager.FindByEmailAsync(User.Identity.Name).Result.Date</p>
+                            <p>@UserManager.FindByEmailAsync(User.Identity.Name).Result.Address</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="Delete-profile">
+                <div class="header-profile">
+                    <header class="ContainerHeader">
+                        <div class="ContainerHeaderstyles__Header">
+                            <h5 class="header-profile section-profile heading">Удалить учетную запись</h5>
+                        </div>
+                    </header>
+                </div>
+                <section>
+                    <p class="section-profile">
+                        <br />Обратитесь в службу поддержки, чтобы удалить свою учетную запись.<br />
+                        Зайдите на нашу страницу с контактными данными:
+                        <span>help.com</span><br />
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+    <form method="post" asp-controller="Account" asp-action="Logout">
+        <input type="submit" value="Выход" />
+    </form>
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login">Вход</a>
+    <a asp-controller="Account" asp-action="Register">Регистрация</a>
+}
